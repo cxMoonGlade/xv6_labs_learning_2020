@@ -131,6 +131,11 @@ static uint64 (*syscalls[])(void) = {
 [SYS_trace]   sys_trace,
 };
 
+static char *syscall_names[] = {
+  "fork", "exit", "wait", "pipe", "read", "kill", "exec", "fstat", "chdir","dup", "getpid",
+  "sbrk", "sleep", "uptime", "open", "write", "mknod", "unlink", "link", "mkdir", "close", "tace"
+};
+
 void
 syscall(void)
 {
@@ -138,7 +143,8 @@ syscall(void)
   struct proc *p = myproc();
 
   num = p->trapframe->a7;
-  if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
+  if(num > 0 && num < NELEM(syscalls) && syscalls[num]) { // num > 0 means num starts at 1
+    printf("%s is called!\n", syscall_names[num-1]);
     p->trapframe->a0 = syscalls[num]();   // read a specific number then set the a0 to an ele from syscall.h
   } else {
     printf("%d %s: unknown sys call %d\n",
