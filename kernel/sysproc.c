@@ -95,3 +95,10 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// add systace() function to sysproc.c
+uint64
+sys_trace(void){
+  printf("sys_trace:Hi!\n");
+  return 0;
+}
