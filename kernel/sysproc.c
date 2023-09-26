@@ -96,9 +96,12 @@ sys_uptime(void)
   return xticks;
 }
 
-// add systace() function to sysproc.c
+// add systace() function to kernel/sysproc.c
 uint64
 sys_trace(void){
-  printf("sys_trace:Hi!\n");
+  int n;
+  if (argint(0, &n) < 0)
+    return -1;
+  printf("sys_trace: Hi! n is %d\n", n);
   return 0;
 }

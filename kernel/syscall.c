@@ -136,6 +136,7 @@ static char *syscall_names[] = {
   "sbrk", "sleep", "uptime", "open", "write", "mknod", "unlink", "link", "mkdir", "close", "tace"
 };
 
+// entry point for system calls
 void
 syscall(void)
 {
