@@ -144,15 +144,15 @@ syscall(void)
   struct proc *p = myproc();
 
   num = p->trapframe->a7;
+
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) { // num > 0 means num starts at 1
+  // read a specific number then set the a0 to an ele from syscall.h
+    p->trapframe->a0 = syscalls[num](); 
     int trace_mask = p->trace_mask;
     if ((trace_mask >> num ) & 1) {
       // 3: syscall read -> 1023
       printf("%d: syscall %s -> %d\n", p->pid, syscall_names[num-1], p->trapframe->a0);
-      
     }
-    
-    p->trapframe->a0 = syscalls[num]();   // read a specific number then set the a0 to an ele from syscall.h
   } else {
     printf("%d %s: unknown sys call %d\n",
             p->pid, p->name, num);
