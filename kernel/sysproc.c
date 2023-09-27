@@ -95,3 +95,14 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// add systace() function to kernel/sysproc.c
+uint64
+sys_trace(void){
+  int mask;
+  if (argint(0, &mask) < 0)
+    return -1;
+  struct proc *proc = myproc();
+  proc -> trace_mask = mask;
+  return 0;
+}
