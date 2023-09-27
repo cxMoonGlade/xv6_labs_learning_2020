@@ -99,9 +99,10 @@ sys_uptime(void)
 // add systace() function to kernel/sysproc.c
 uint64
 sys_trace(void){
-  int n;
-  if (argint(0, &n) < 0)
+  int mask;
+  if (argint(0, &mask) < 0)
     return -1;
-  printf("sys_trace: Hi! n is %d\n", n);
+  struct proc *proc = myproc();
+  proc -> trace_mask = mask;
   return 0;
 }
