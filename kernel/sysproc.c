@@ -106,3 +106,9 @@ sys_trace(void){
   proc -> trace_mask = mask;
   return 0;
 }
+
+uint64
+sys_sysinfo(void){
+  printf("sysinfo says hi!\n");
+  return 0;
+}
