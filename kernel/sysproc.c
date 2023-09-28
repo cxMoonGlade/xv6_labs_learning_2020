@@ -107,6 +107,7 @@ sys_trace(void){
   return 0;
 }
 
+// add sysinfo to kernel/sysproc.c
 uint64
 sys_sysinfo(void){
   printf("sysinfo says hi!\n");
