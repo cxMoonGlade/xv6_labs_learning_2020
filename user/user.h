@@ -1,5 +1,6 @@
 struct stat;
 struct rtcdate;
+struct sysinfo; // declare the prototype struct
 
 // system calls
 int fork(void);
@@ -24,6 +25,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int trace(int); // add the trace to syscall
+int sysinfo(struct sysinfo*); //add sysinfo to syscall
 
 // ulib.c
 int stat(const char*, struct stat*);
