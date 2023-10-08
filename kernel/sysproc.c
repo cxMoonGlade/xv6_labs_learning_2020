@@ -110,6 +110,18 @@ sys_trace(void){
 // add sysinfo to kernel/sysproc.c
 uint64
 sys_sysinfo(void){
-  printf("sysinfo says hi!\n");
+  uint64 ptr, nfreemem, nprocess;
+  struct proc *proc = myproc();
+
+  if (argaddr(0, &ptr) < 0) return -1;
+
+  nfreemem = freemem();
+  nprocess = nproc();
+
+  if (copyout(proc->pagetable, ptr, (char *)&nfreemem, sizeof(nfreemem)) < 0 ||
+      copyout(proc->pagetable, ptr + sizeof(nfreemem), (char *)&nprocess, sizeof(nprocess)) < 0){
+        return -1;
+      } 
+  //printf("sysinfo says hi!\n");
   return 0;
 }
